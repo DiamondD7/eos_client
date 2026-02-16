@@ -1,0 +1,38 @@
+.form__wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form__input{
+    margin-bottom: 20px;
+
+    width: 350px;
+    padding: 5px;
+    border-radius: 5px;
+    border:1px solid #ccc;
+    outline: none;
+}
+
+.form-sentence__textarea{
+    min-width: 350px;
+    max-width: 350px;
+    min-height: 200px;
+    max-height: 200px;
+
+    padding: 5px;
+    border:1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.form-submit__btn{
+    width: 350px;
+    margin-top: 20px;
+    font-size: 12px;
+    padding: 2px;
+    border-radius: 5px;
+    border:1px solid #ccc;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
