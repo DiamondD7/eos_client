@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { LogDailyData, CheckUserIdentity } from "../../../assets/js/API";
 
 import "../../../styles/formstyles.css";
 const Form = () => {
@@ -28,9 +29,69 @@ const Form = () => {
     }
   };
 
+  const handleCheckIdentity = async () => {
+    try {
+      const response = await fetch(CheckUserIdentity, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          Email: email,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      if (data.status === true) {
+        await handleLogDailyData(data.userId);
+      }
+    } catch (err) {
+      console.error("Error checking identity:", err);
+      throw err;
+    }
+  };
+
+  const handleLogDailyData = async (userId) => {
+    try {
+      const response = await fetch(LogDailyData, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          UserId: userId,
+          EnergyLevel: mood,
+          SleepHours: sleep,
+          JournalText: thoughts,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.error("Error logging daily data:", err);
+      throw err;
+    }
+  };
   return (
     <div>
-      <form className="form__wrapper">
+      <form
+        className="form__wrapper"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          await handleCheckIdentity();
+        }}
+      >
         <input
           className="form__input"
           type="text"
@@ -79,7 +140,9 @@ const Form = () => {
           onChange={(e) => setThoughts(e.target.value)}
         ></textarea>
 
-        <button className="form-submit__btn">Submit</button>
+        <button type="submit" className="form-submit__btn">
+          Submit
+        </button>
       </form>
     </div>
   );
