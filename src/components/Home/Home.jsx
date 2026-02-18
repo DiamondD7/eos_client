@@ -1,13 +1,32 @@
 import React from "react";
 import Form from "./Form/Form";
 
+import "../../styles/homestyles.css";
 const Home = () => {
   return (
     <div>
-      <h1>Welcome to the Daily Emotional Data Logger v0.1</h1>
+      <h1 className="welcome__h1"> Hey, thanks for doing this.</h1>
       <br />
-      <br />
-      <Form />
+      <div className="welcome-statement-form__wrapper">
+        <p className="welcome-statement__p">
+          This is a small experiment I’m running. <br /> <br /> The idea is
+          simple: if we track a few signals daily, we can figure out what
+          “normal” looks like for you. <br />
+          <br /> After a month, we can start spotting when something shifts.
+          Like energy dropping, sleep changing, or stress creeping up. It’s not
+          medical. It’s just pattern awareness. <br />
+          <br />
+          It should take less than a minute a day. <br />
+          <br /> Your responses are private and won’t be shared. This is just
+          for this experiment. If you ever want your data removed, I’ll delete
+          it. <br />
+          <br /> Consistency is the only thing that matters. Let’s see what we
+          discover.
+          <br />
+          <br /> - Aaron
+        </p>
+        <Form />
+      </div>
     </div>
   );
 };
