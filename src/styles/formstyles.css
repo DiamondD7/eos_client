@@ -32,7 +32,29 @@
     font-size: 12px;
     padding: 2px;
     border-radius: 5px;
+    color: #fff;
     border:1px solid #ccc;
-    background-color: #f0f0f0;
+    background-color: limegreen;
     cursor: pointer;
+}
+
+.disabledBtnForm{
+    color: black;
+    background-color: transparent;
+    cursor: not-allowed;
+}
+
+.error-msg{
+    color: red;
+    font-size: 12px;
+}
+
+.success-submit-msg__p{
+    color: #fff;
+    background-color: limegreen;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+
+    margin-top: 20px;
 }

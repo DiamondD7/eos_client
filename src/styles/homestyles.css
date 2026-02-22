@@ -1,0 +1,24 @@
+.welcome__h1{
+    display: inline-block;
+
+    margin: 20px 0 0 20px;
+    padding: 10px;
+    border-radius: 5px;
+
+    color: #ffffff;
+    background-color: #202020;
+}
+
+.welcome-statement-form__wrapper{
+    display:flex;
+    gap: 150px;
+    margin-top: 20px;
+}
+
+.welcome-statement__p{
+    display: inline-block;
+
+    width: 700px;
+    padding: 10px;
+    margin: 20px 0 0 20px;
+}
