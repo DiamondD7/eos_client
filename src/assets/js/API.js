@@ -1,2 +1,2 @@
-export const LogDailyData = "http://localhost:5164/api/User/log-daily-data";
-export const CheckUserIdentity = "http://localhost:5164/api/User/user-identity";
+export const LogDailyData = "https://eosserverphase0-had5cxdyfna9aacq.australiacentral-01.azurewebsites.net/api/User/log-daily-data";
+export const CheckUserIdentity = "https://eosserverphase0-had5cxdyfna9aacq.australiacentral-01.azurewebsites.net/api/User/user-identity";
