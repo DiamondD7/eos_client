@@ -7,11 +7,15 @@ const Form = () => {
 
   const [errorAtMoodField, setErrorAtMoodField] = useState(false);
   const [errorAtSleepField, setErrorAtSleepField] = useState(false);
+  const [errorAtEnergyField, setErrorAtEnergyField] = useState(false);
+  const [errorAtOutputWorkField, setErrorAtOutputWorkField] = useState(false);
 
   const [ableToSubmit, setAbleToSubmit] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [outputWork, setOutputWork] = useState("");
+  const [energy, setEnergy] = useState("");
   const [mood, setMood] = useState("");
   const [sleep, setSleep] = useState("");
   const [thoughts, setThoughts] = useState("");
@@ -20,6 +24,8 @@ const Form = () => {
     if (
       firstName &&
       email &&
+      outputWork &&
+      energy &&
       mood &&
       sleep &&
       thoughts &&
@@ -34,10 +40,14 @@ const Form = () => {
     firstName,
     email,
     mood,
+    energy,
+    outputWork,
     sleep,
     thoughts,
     errorAtMoodField,
     errorAtSleepField,
+    errorAtEnergyField,
+    errorAtOutputWorkField,
   ]);
 
   const handleOnChange = (e) => {
@@ -60,6 +70,22 @@ const Form = () => {
       }
       setErrorAtSleepField(false);
       setSleep(value);
+    } else if (name === "energy") {
+      if (value < 1 || value > 10) {
+        setErrorAtEnergyField(true);
+        setEnergy("");
+        return;
+      }
+      setErrorAtEnergyField(false);
+      setEnergy(value);
+    } else if (name === "outputWork") {
+      if (value < 1 || value > 10) {
+        setErrorAtOutputWorkField(true);
+        setOutputWork("");
+        return;
+      }
+      setErrorAtOutputWorkField(false);
+      setOutputWork(value);
     }
   };
 
@@ -100,7 +126,9 @@ const Form = () => {
         },
         body: JSON.stringify({
           UserId: userId,
-          EnergyLevel: mood,
+          OutputWork: outputWork,
+          EnergyLevel: energy,
+          MoodLevel: mood,
           SleepHours: sleep,
           JournalText: thoughts,
         }),
@@ -118,6 +146,8 @@ const Form = () => {
         setEmail("");
         setMood("");
         setSleep("");
+        setEnergy("");
+        setOutputWork("");
         setThoughts("");
 
         setTimeout(() => {
@@ -141,22 +171,43 @@ const Form = () => {
         <input
           className="form__input"
           type="text"
+          value={firstName}
           placeholder="First name"
           onChange={(e) => setFirstName(e.target.value)}
         />
         <input
           className="form__input"
           type="text"
+          value={lastName}
           placeholder="Last name (optional)"
           onChange={(e) => setLastName(e.target.value)}
         />
         <input
           className="form__input"
           type="text"
+          value={email}
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <br />
+
+        {errorAtEnergyField && (
+          <label className="error-msg">
+            Error: Please enter a value between 1 - 10
+          </label>
+        )}
+        <input
+          className="form__input"
+          type="number"
+          value={energy}
+          name="energy"
+          min={1}
+          max={10}
+          required
+          onChange={handleOnChange}
+          placeholder="Rate your energy level from 1-10 today"
+        />
+
         {errorAtMoodField && (
           <label className="error-msg">
             Error: Please enter a value between 1 - 10
@@ -172,6 +223,23 @@ const Form = () => {
           required
           onChange={handleOnChange}
           placeholder="Rate your mood from 1-10 today"
+        />
+
+        {errorAtOutputWorkField && (
+          <label className="error-msg">
+            Error: Please enter a value between 1 - 10
+          </label>
+        )}
+        <input
+          className="form__input"
+          type="number"
+          value={outputWork}
+          name="outputWork"
+          min={1}
+          max={10}
+          required
+          onChange={handleOnChange}
+          placeholder="How productive were you today on a scale of 1-10?"
         />
 
         {errorAtSleepField && (
@@ -195,6 +263,7 @@ const Form = () => {
         <textarea
           className="form-sentence__textarea"
           placeholder="Write 2–5 sentences about your day"
+          value={thoughts}
           required
           onChange={(e) => setThoughts(e.target.value)}
         ></textarea>
