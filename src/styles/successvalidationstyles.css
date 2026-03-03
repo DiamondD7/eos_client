@@ -1,0 +1,17 @@
+.success-validation__wrapper{
+    background-color: limegreen;
+    padding: 20px;
+    border-radius: 5px;
+    height: 100%;
+    width: 500px;
+}
+
+.success-validation__wrapper h1{
+    color:#fff;
+    font-size: 24px;
+}
+
+.success-validation__wrapper p{
+    color:#fff;
+    font-size: 14px;
+}

@@ -2,9 +2,11 @@ import React, { use, useEffect, useState } from "react";
 import { LogDailyData, CheckUserIdentity } from "../../../assets/js/API";
 
 import "../../../styles/formstyles.css";
-const Form = () => {
-  const [successfullySubmitted, setSuccessfullySubmitted] = useState(false);
-
+import { CircleNotchIcon } from "@phosphor-icons/react";
+const Form = ({ setSuccessfullySubmitted }) => {
+  const [isLoading, setIsloading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [errorUserNotFound, setErrorUserNotFound] = useState(false);
   const [errorAtMoodField, setErrorAtMoodField] = useState(false);
   const [errorAtSleepField, setErrorAtSleepField] = useState(false);
   const [errorAtEnergyField, setErrorAtEnergyField] = useState(false);
@@ -90,6 +92,7 @@ const Form = () => {
   };
 
   const handleCheckIdentity = async () => {
+    setIsloading(true);
     try {
       const response = await fetch(CheckUserIdentity, {
         method: "POST",
@@ -102,12 +105,22 @@ const Form = () => {
         }),
       });
 
+      if (response.status === 404) {
+        setErrorUserNotFound(true);
+        setIsloading(false);
+        return;
+      }
+
       if (!response.ok) {
+        alert(
+          "An error occurred while checking user identity. If you see this message, please let me know",
+        );
         throw new Error("Network response was not ok");
       }
 
       const data = await response.json();
       if (data.status === true) {
+        setErrorUserNotFound(false);
         await handleLogDailyData(data.userId);
       }
     } catch (err) {
@@ -140,7 +153,9 @@ const Form = () => {
 
       const data = await response.json();
       if (data.status === true) {
+        setIsloading(false);
         setSuccessfullySubmitted(true);
+        setSuccess(true);
         setFirstName("");
         setLastName("");
         setEmail("");
@@ -151,7 +166,7 @@ const Form = () => {
         setThoughts("");
 
         setTimeout(() => {
-          setSuccessfullySubmitted(false);
+          setSuccess(false);
         }, 3000);
       }
     } catch (err) {
@@ -161,6 +176,11 @@ const Form = () => {
   };
   return (
     <div>
+      {errorUserNotFound && (
+        <p style={{ color: "red", marginBottom: "10px" }}>
+          User is not found. Please check that your email was entered correctly.
+        </p>
+      )}
       <form
         className="form__wrapper"
         onSubmit={async (e) => {
@@ -273,10 +293,18 @@ const Form = () => {
           disabled={!ableToSubmit}
           className={`form-submit__btn ${ableToSubmit ? "" : "disabledBtnForm"}`}
         >
-          Submit
+          {isLoading === true ? (
+            <CircleNotchIcon
+              color="#fff"
+              size={15}
+              className={"-btn-loading__icon"}
+            />
+          ) : (
+            "Submit"
+          )}
         </button>
 
-        {successfullySubmitted && (
+        {success && (
           <p className="success-submit-msg__p">Successfully submitted</p>
         )}
       </form>

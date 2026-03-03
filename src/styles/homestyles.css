@@ -1,12 +1,11 @@
 .welcome__h1{
     display: inline-block;
+    font-size: 40px;
 
     margin: 20px 0 0 20px;
     padding: 10px;
     border-radius: 5px;
 
-    color: #ffffff;
-    background-color: #202020;
 }
 
 .welcome-statement-form__wrapper{
