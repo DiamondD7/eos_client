@@ -302,7 +302,7 @@ const Form = ({ setSuccessfullySubmitted }) => {
         ></textarea>
 
         <br />
-        <p style={{ fontSize: "12px", margin: "10px 0 10px 0" }}>
+        <p className="pick-a-color-statement__p">
           Optional: Pick a color that feels like today, a color helps us spot
           patterns over time.
         </p>
