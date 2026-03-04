@@ -4,6 +4,7 @@ import { LogDailyData, CheckUserIdentity } from "../../../assets/js/API";
 import "../../../styles/formstyles.css";
 import { CircleNotchIcon } from "@phosphor-icons/react";
 const Form = ({ setSuccessfullySubmitted }) => {
+  const [chosenColor, setChosenColor] = useState(0);
   const [isLoading, setIsloading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorUserNotFound, setErrorUserNotFound] = useState(false);
@@ -143,6 +144,7 @@ const Form = ({ setSuccessfullySubmitted }) => {
           EnergyLevel: energy,
           MoodLevel: mood,
           SleepHours: sleep,
+          ColorDayNumber: chosenColor,
           JournalText: thoughts,
         }),
       });
@@ -174,6 +176,16 @@ const Form = ({ setSuccessfullySubmitted }) => {
       throw err;
     }
   };
+
+  const handleColorClick = (e) => {
+    const value = Number(e.target.value);
+    if (value === chosenColor) {
+      setChosenColor(0);
+    } else {
+      setChosenColor(value);
+    }
+  };
+
   return (
     <div>
       {errorUserNotFound && (
@@ -278,6 +290,7 @@ const Form = ({ setSuccessfullySubmitted }) => {
           onChange={handleOnChange}
           placeholder="How many hours of sleep did you get last night?"
         />
+
         <br />
         <br />
         <textarea
@@ -287,6 +300,46 @@ const Form = ({ setSuccessfullySubmitted }) => {
           required
           onChange={(e) => setThoughts(e.target.value)}
         ></textarea>
+
+        <br />
+        <p style={{ fontSize: "12px", margin: "10px 0 10px 0" }}>
+          Optional: Pick a color that feels like today, a color helps us spot
+          patterns over time.
+        </p>
+        <div className="day-color-btns__wrapper">
+          <p style={{ fontSize: "10px" }}>← Not great</p>
+          <button
+            type="button"
+            className={`one__btn ${chosenColor === 1 ? "chosenColor" : ""}`}
+            value={1}
+            onClick={(e) => handleColorClick(e)}
+          ></button>
+          <button
+            type="button"
+            className={`two__btn ${chosenColor === 2 ? "chosenColor" : ""}`}
+            value={2}
+            onClick={(e) => handleColorClick(e)}
+          ></button>
+          <button
+            type="button"
+            className={`three__btn ${chosenColor === 3 ? "chosenColor" : ""}`}
+            value={3}
+            onClick={(e) => handleColorClick(e)}
+          ></button>
+          <button
+            type="button"
+            className={`four__btn ${chosenColor === 4 ? "chosenColor" : ""}`}
+            value={4}
+            onClick={(e) => handleColorClick(e)}
+          ></button>
+          <button
+            type="button"
+            className={`five__btn ${chosenColor === 5 ? "chosenColor" : ""}`}
+            value={5}
+            onClick={(e) => handleColorClick(e)}
+          ></button>
+          <p style={{ fontSize: "10px" }}>Great →</p>
+        </div>
 
         <button
           type="submit"

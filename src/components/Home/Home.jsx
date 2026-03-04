@@ -15,7 +15,7 @@ const Home = () => {
           This is a small experiment I’m running. <br /> <br /> The idea is
           simple: if we track a few signals daily, we can figure out what
           “normal” looks like for you. <br />
-          <br /> After a month, we can start spotting when something shifts.
+          <br /> After a month, we can start spotting when something shifts.{" "}
           <strong>
             Like energy dropping, sleep changing, stress creeping up, or
             recovery slowing down

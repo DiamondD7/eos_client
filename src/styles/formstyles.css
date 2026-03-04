@@ -58,3 +58,53 @@
 
     margin-top: 20px;
 }
+
+.day-color-btns__wrapper{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.one__btn{
+    background-color: #0B1F3A;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+.two__btn{
+    background-color: #2F4F6F;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+.three__btn{
+    background-color: #C2B8A3;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+.four__btn{
+    background-color: #E3A76F;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+.five__btn{
+    background-color: #FFE74B;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+.chosenColor{
+    border: 2px solid rgb(0, 217, 255);
+}
